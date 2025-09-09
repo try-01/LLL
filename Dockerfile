@@ -17,6 +17,7 @@ RUN apt update && apt upgrade -y && \
     wget curl \
     openssh-server \
     sudo \
+    ca-certificates \
     jq  # jq adalah utilitas JSON yang ringan untuk mengambil URL ngrok
 
 # Instalasi ngrok
