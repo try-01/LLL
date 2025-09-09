@@ -2,10 +2,10 @@
 FROM ubuntu:22.04
 
 # PERUBAHAN: Menggunakan ENV agar variabel tersedia saat runtime, bukan hanya saat build
-ARG NGROK_TOKEN
-ARG REGION=ap
-ARG USERNAME
-ARG USER_PASSWORD
+ARG NGROK_TOKEN=""
+ARG REGION="ap"
+ARG USERNAME=""
+ARG USER_PASSWORD=""
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Instalasi paket-paket minimal yang dibutuhkan untuk SSH
