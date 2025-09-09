@@ -3,7 +3,7 @@ FROM ubuntu:22.04
 
 # PERUBAHAN: Menggunakan ENV agar variabel tersedia saat runtime, bukan hanya saat build
 ENV NGROK_TOKEN
-ENV REGION="ap"
+ENV REGION=ap
 ENV USERNAME
 ENV USER_PASSWORD
 ENV DEBIAN_FRONTEND=noninteractive
