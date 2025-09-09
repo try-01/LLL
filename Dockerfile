@@ -29,6 +29,9 @@ RUN useradd -m -s /bin/bash ${USERNAME} && \
     echo "${USERNAME}:${USER_PASSWORD}" | chpasswd && \
     adduser ${USERNAME} sudo
 
+RUN echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config && \
+    mkdir -p /run/sshd
+
 # --- Skrip Startup Kontainer yang Diperbaiki ---
 RUN echo "#!/bin/bash" > /startup.sh && \
     # PERBAIKAN: Konfigurasi authtoken ngrok terlebih dahulu
