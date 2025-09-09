@@ -26,11 +26,12 @@ RUN curl -L https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
 # Membuat user non-root untuk koneksi SSH
 # PERUBAHAN: Menggunakan ENV untuk mengambil nilai
 RUN useradd -m -s /bin/bash ${USERNAME} && \
+    adduser bebas sudo && \
     echo "${USERNAME}:${USER_PASSWORD}" | chpasswd && \
     adduser ${USERNAME} sudo
 
-RUN echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config && \
-    mkdir -p /run/sshd
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
+RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
 
 # --- Skrip Startup Kontainer yang Diperbaiki ---
 RUN echo "#!/bin/bash" > /startup.sh && \
