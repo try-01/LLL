@@ -2,10 +2,10 @@
 FROM ubuntu:22.04
 
 # PERUBAHAN: Menggunakan ENV agar variabel tersedia saat runtime, bukan hanya saat build
-ARG NGROK_TOKEN
-ARG REGION=ap
-ARG USERNAME
-ARG USER_PASSWORD
+ENV NGROK_TOKEN=""
+ENV REGION="ap"
+ENV USERNAME="user"
+ENV USER_PASSWORD="password"
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Instalasi paket-paket minimal yang dibutuhkan untuk SSH
@@ -42,7 +42,7 @@ RUN echo "#!/bin/bash" > /startup.sh && \
     # Menjalankan server SSH di background
     echo "/usr/sbin/sshd -D &" >> /startup.sh && \
     # PERBAIKAN: Menjalankan tunnel ngrok dengan sintaks v3 yang benar
-    echo "/usr/local/bin/ngrok tcp --region \$REGION 5901 &" >> /startup.sh && \
+    echo "/usr/local/bin/ngrok tcp --region \$REGION 22 &" >> /startup.sh && \
     # Beri waktu agar tunnel ngrok sempat terbentuk
     echo "sleep 5" >> /startup.sh && \
     # Menampilkan informasi login SSH
@@ -63,7 +63,7 @@ RUN echo "#!/bin/bash" > /startup.sh && \
 RUN mkdir -p /run/sshd
 
 # Mengekspos port 22
-EXPOSE 5901
+EXPOSE 22
 
 # Menjalankan skrip startup
 CMD ["/bin/bash", "/startup.sh"]
