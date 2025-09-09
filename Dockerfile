@@ -13,6 +13,7 @@ RUN apt update && apt upgrade -y && \
     apt install -y --no-install-recommends \
     wget curl \
     openssh-server \
+    ca-certificates \
     sudo \
     jq
 
