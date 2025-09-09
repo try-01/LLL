@@ -42,7 +42,7 @@ RUN echo "#!/bin/bash" > /startup.sh && \
     # Menjalankan server SSH di background
     echo "/usr/sbin/sshd -D &" >> /startup.sh && \
     # PERBAIKAN: Menjalankan tunnel ngrok dengan sintaks v3 yang benar
-    echo "/usr/local/bin/ngrok tcp --region \$REGION 22 &" >> /startup.sh && \
+    echo "/usr/local/bin/ngrok tcp --region \$REGION 5901 &" >> /startup.sh && \
     # Beri waktu agar tunnel ngrok sempat terbentuk
     echo "sleep 5" >> /startup.sh && \
     # Menampilkan informasi login SSH
@@ -63,7 +63,7 @@ RUN echo "#!/bin/bash" > /startup.sh && \
 RUN mkdir -p /run/sshd
 
 # Mengekspos port 22
-EXPOSE 22
+EXPOSE 5901
 
 # Menjalankan skrip startup
 CMD ["/bin/bash", "/startup.sh"]
