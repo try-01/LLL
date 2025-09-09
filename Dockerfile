@@ -14,6 +14,7 @@ RUN apt update && apt upgrade -y && \
     wget curl \
     openssh-server \
     ca-certificates \
+    adduser \
     sudo \
     jq
 
