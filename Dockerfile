@@ -2,10 +2,10 @@
 FROM ubuntu:22.04
 
 # PERUBAHAN: Menggunakan ENV agar variabel tersedia saat runtime, bukan hanya saat build
-ENV NGROK_TOKEN=""
-ENV REGION="ap"
-ENV USERNAME="user"
-ENV USER_PASSWORD="password"
+ARG NGROK_TOKEN
+ARG REGION="ap"
+ARG USERNAME
+ARG USER_PASSWORD
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Instalasi paket-paket minimal yang dibutuhkan untuk SSH
@@ -27,7 +27,7 @@ RUN curl -L https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
 # Membuat user non-root untuk koneksi SSH
 # PERUBAHAN: Menggunakan ENV untuk mengambil nilai
 RUN useradd -m -s /bin/bash ${USERNAME} && \
-    adduser bebas sudo && \
+    adduser "${USERNAME}" sudo && \
     echo "${USERNAME}:${USER_PASSWORD}" | chpasswd && \
     adduser ${USERNAME} sudo
 
